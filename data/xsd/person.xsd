@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+          <!-- XML Schema Generated from XML Document on Tue Aug 18 2015 17:50:12 GMT+0530 (IST) -->
+          <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+       <xs:element name="person">
+              <xs:complexType>
+                     <xs:sequence>
+                            <xs:element name="firstName" type="xs:string"></xs:element>
+                            <xs:element name="lastName" type="xs:string"></xs:element>
+                            <xs:element name="address">
+                                   <xs:complexType>
+                                          <xs:sequence>
+                                                 <xs:element name="houseNo" type="xs:int"></xs:element>
+                                                 <xs:element name="street" type="xs:string"></xs:element>
+                                                 <xs:element name="city" type="xs:string"></xs:element>
+                                                 <xs:element name="state" type="xs:string"></xs:element>
+                                             </xs:sequence>
+                                      </xs:complexType>
+                               </xs:element>
+                        </xs:sequence>
+                 </xs:complexType>
+          </xs:element>
+   </xs:schema>

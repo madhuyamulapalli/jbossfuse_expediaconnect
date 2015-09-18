@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AvailRateUpdateRQ>
+	<Authentication username="testuser" password="testpass" />
+	<Hotel id="3540" />
+	<AvailRateUpdate>
+		<DateRange from="2012-08-01" to="2012-08-31" />
+		<RoomType id="558945">
+			<Inventory flexibleAllocation="10" />
+		</RoomType>
+	</AvailRateUpdate>
+</AvailRateUpdateRQ>

@@ -1,0 +1,43 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+       <xs:element name="AvailRateUpdateRQ">
+              <xs:complexType>
+                     <xs:sequence>
+                            <xs:element name="Authentication">
+                                   <xs:complexType>
+                                          <xs:attribute name="username" type="xs:string"></xs:attribute>
+                                          <xs:attribute name="password" type="xs:string"></xs:attribute>
+                                      </xs:complexType>
+                               </xs:element>
+                            <xs:element name="Hotel">
+                                   <xs:complexType>
+                                          <xs:attribute name="id" type="xs:int"></xs:attribute>
+                                      </xs:complexType>
+                               </xs:element>
+                            <xs:element name="AvailRateUpdate" maxOccurs="unbounded">
+                                   <xs:complexType>
+                                          <xs:sequence>
+                                                 <xs:element name="DateRange">
+                                                        <xs:complexType>
+                                                               <xs:attribute name="from" type="xs:date"></xs:attribute>
+                                                               <xs:attribute name="to" type="xs:date"></xs:attribute>
+                                                           </xs:complexType>
+                                                    </xs:element>
+                                                 <xs:element name="RoomType">
+                                                        <xs:complexType>
+                                                               <xs:sequence>
+                                                                      <xs:element name="Inventory">
+                                                                             <xs:complexType>
+                                                                                    <xs:attribute name="flexibleAllocation" type="xs:int"></xs:attribute>
+                                                                                </xs:complexType>
+                                                                         </xs:element>
+                                                                  </xs:sequence>
+                                                               <xs:attribute name="id" type="xs:int"></xs:attribute>
+                                                           </xs:complexType>
+                                                    </xs:element>
+                                             </xs:sequence>
+                                      </xs:complexType>
+                               </xs:element>
+                        </xs:sequence>
+                 </xs:complexType>
+          </xs:element>
+   </xs:schema>

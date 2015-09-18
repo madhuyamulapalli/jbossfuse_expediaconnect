@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AvailRateUpdateRQ xmlns="http://www.expediaconnect.com/EQC/AR/2011/06">
+	<Authentication username="testuser" password="testpass" />
+	<Hotel id="3546" />
+	<AvailRateUpdate>
+		<DateRange from="2012-08-01" to="2012-08-15" />
+		<RoomType id="558945">
+			<Inventory flexibleAllocation="10" />
+		</RoomType>
+	</AvailRateUpdate>
+	<AvailRateUpdate>
+		<DateRange from="2012-08-16" to="2012-08-31" />
+		<RoomType id="558945">
+			<Inventory flexibleAllocation="20" />
+		</RoomType>
+	</AvailRateUpdate>
+</AvailRateUpdateRQ>

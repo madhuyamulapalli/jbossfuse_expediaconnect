@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person>
+  <firstName>
+	Madhu
+  </firstName>
+  <lastName>
+	Yamulapalli
+  </lastName>
+  <address>
+	<houseNo>
+	  1234
+	</houseNo>
+	<street>
+	  RoadNo2
+	</street>
+	<city>
+	  Bangalore
+	</city>
+	<state>
+	  Karnataka
+	</state>
+  </address>
+</person>

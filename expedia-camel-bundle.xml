@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="ExpediaDemo">
+  <repository>RepositoryURL</repository>
+  <feature name="expedia-camel-bundle">
+    <feature>expedia-camel-bundle</feature>
+  </feature>
+</features>

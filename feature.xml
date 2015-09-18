@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="my-features">
+  <feature name="expedia">
+    <bundle>file:///Users/madhu/workspace/data-receiver/target/hotelsoft-datareceiver-1.0.0-SNAPSHOT.jar</bundle>
+  </feature>
+</features>

@@ -1,0 +1,57 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+       xsi:schemaLocation="
+       http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd
+       http://cxf.apache.org/configuration/security
+       http://cxf.apache.org/schemas/configuration/security.xsd
+       http://cxf.apache.org/transports/http/configuration
+       http://cxf.apache.org/schemas/configuration/http-conf.xsd
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+  
+  <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+      <property name="brokerURL" value="tcp://localhost:61616"/>
+      <property name="userName" value="admin" />
+      <property name="password" value="admin" />
+  </bean> 
+  
+  <cxf:rsClient id="rsClient" address="https://simulator.expediaquickconnect.com/connect/ar"
+    serviceClass="com.hotelsoft.expedia.ws.ExpediaConnect"
+    loggingFeatureEnabled="true"/>
+
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint" xmlns:e="http://www.expediaconnect.com/EQC/AR/2011/06">
+  <endpoint uri="dozer:xmltransformation?sourceModel=person.Person&amp;targetModel=consolidatedperson.Person&amp;marshalId=consolidatedperson&amp;unmarshalId=person&amp;mappingFile=transformation.xml" id="xmltransformation"/>
+  <dataFormats>
+    <jaxb contextPath="person" prettyPrint="true" id="person"/>
+    <jaxb contextPath="consolidatedperson" prettyPrint="true" id="consolidatedperson"/>
+  </dataFormats>
+  <route id="hotelsoft-expedia">
+    <from uri="activemq:queue:hotelQueueConsumer"/>
+    <choice>
+      <when>
+        <xpath>/e:AvailRateUpdateRQ/e:Hotel[@id="311" or @id="511"]</xpath>
+        <log message="to expedia xml"/>
+        <to uri="activemq:queue:expedia" id="expedia"/>
+        <to pattern="InOut" uri="cxfrs:bean:rsClient" id="expediaconnect"/>
+        <log message="sent request to expedia connect webservice"/>
+        <to pattern="InOnly" uri="file:/Users/madhu/workspace/data-receiver/data/expedia-connect-responses" id="expediaResults"/>
+      </when>
+      <when>
+        <xpath>/e:AvailRateUpdateRQ/e:Hotel[@id="3546"]</xpath>
+        <log message="to priceline xml"/>
+        <to uri="activemq:queue:priceline" id="priceline"/>
+      </when>
+      <when>
+        <xpath>/person</xpath>
+        <log message="in person xml"/>
+        <to ref="xmltransformation"/>
+        <to pattern="InOnly" uri="file:/Users/madhu/workspace/data-receiver/data/person-consumer" id="personConsumer"/>
+      </when>
+    </choice>
+  </route>
+</camelContext>
+
+</blueprint>
